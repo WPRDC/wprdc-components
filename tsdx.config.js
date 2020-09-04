@@ -18,7 +18,7 @@ module.exports = {
         extract: !!options.writeMeta,
       }),
     );
-    config.plugin.push(image());
+    config.plugins.push(image());
     return config;
   },
 };

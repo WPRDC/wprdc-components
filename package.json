@@ -39,14 +39,15 @@
   "module": "dist/wprdc.esm.js",
   "devDependencies": {
     "@babel/core": "^7.11.0",
+    "@babel/plugin-proposal-class-properties": "^7.10.4",
     "@rollup/plugin-image": "^2.0.5",
-    "@storybook/addon-actions": "^6.0.6",
-    "@storybook/addon-docs": "^6.0.6",
-    "@storybook/addon-info": "^5.3.19",
-    "@storybook/addon-links": "^6.0.6",
-    "@storybook/addons": "^6.0.7",
-    "@storybook/react": "^6.0.6",
-    "@storybook/theming": "^6.0.7",
+    "@storybook/addon-actions": "^6.0.21",
+    "@storybook/addon-docs": "^6.0.21",
+    "@storybook/addon-info": "^5.3.21",
+    "@storybook/addon-links": "^6.0.21",
+    "@storybook/addons": "^6.0.21",
+    "@storybook/react": "^6.0.21",
+    "@storybook/theming": "^6.0.21",
     "@types/react": "^16.9.44",
     "@types/react-dom": "^16.9.8",
     "@types/react-map-gl": "^5.2.6",
@@ -56,6 +57,7 @@
     "autoprefixer": "^9.8.6",
     "babel-eslint": "^10.0.1",
     "babel-loader": "^8.1.0",
+    "babel-plugin-typescript-to-proptypes": "^1.4.0",
     "ckan": "^0.2.3",
     "css-loader": "^4.2.1",
     "cssnano": "^4.1.10",
@@ -83,9 +85,15 @@
     "typescript": "^3.9.7"
   },
   "dependencies": {
-    "@adobe/react-spectrum": "^3.2.0",
+    "@adobe/react-spectrum/": "^3.2.0",
     "@carto/carto.js": "^4.2.1",
+    "@react-spectrum/button": "^3.2.0",
+    "@react-types/shared": "^3.2.0",
+    "@spectrum-icons/workflow": "^3.1.0",
+    "@types/recharts": "^1.8.14",
     "react-map-gl": "^5.2.7",
+    "react-types": "^0.1.0",
+    "recharts": "^1.8.5",
     "styled-components": "^5.1.1"
   }
 }

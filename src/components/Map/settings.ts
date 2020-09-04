@@ -1,5 +1,4 @@
-import { ViewportProps } from 'react-map-gl';
-import { ViewportOptions } from 'components/Map/types';
+import { BasemapStyle, ViewportOptions } from 'components/Map/types';
 
 export const CARTO_USER = 'wprdc';
 
@@ -14,59 +13,10 @@ export const DEFAULT_VIEWPORT: ViewportOptions = {
   zoom: 12,
 };
 
-/**
- * Generates Mapbox expression that colors map points based on category
- * @param colorScheme
- * @returns {(string|string[]|string)[]}
- */
-const colorExpression = colorScheme => [
-  'match',
-  ['get', 'category'],
-  ...Object.entries(categoryColors(colorScheme)).reduce(
-    (expression, [cat, color]) => [...expression, [cat], color],
-    [],
-  ),
-  'hsl(0, 0%, 0%)',
-];
+export const basemaps: Record<BasemapStyle, string> = {
+  dark: 'mapbox://styles/stevendsaylor/ckd6iq0n702if1inv6rbbq5bg', // Basic/Dark
+  light: 'mapbox://styles/stevendsaylor/ckd6ixslm00461iqqn1hltgs8', // Basic/Light
+  streets: 'mapbox://styles/mapbox/streets-v11',
+};
 
-const assetLayer = colorScheme => ({
-  id: 'asset-points',
-  source: 'assets',
-  'source-layer': 'assets',
-  type: 'circle',
-  paint: {
-    'circle-radius': [
-      'interpolate',
-      ['cubic-bezier', 0.5, 0, 0.5, 1],
-      ['zoom'],
-      8,
-      1,
-      22,
-      12,
-    ],
-    'circle-color': colorExpression(colorScheme),
-    'circle-stroke-width': 1,
-    'circle-stroke-opacity': {
-      stops: [
-        [0, 0],
-        [9, 0],
-        [12, 0.1],
-        [14, 0.3],
-      ],
-    },
-  },
-});
-
-/**
- * Returns themed map layer and corresponding set of colors for use in overlays.
- * @param {string} colorScheme
- * @returns {{categoryColors: {business: string, housing: string, 'education/youth': string, 'non-profit': string, health: string, 'community-center': string, food: string, civic: string, transportation: string}, assetLayer: {paint: {'circle-color': *, 'circle-radius': (string|(string|number)[]|string[]|number)[]}, id: string, source: string, 'source-layer': string, type: string}}}
- */
-export function getTheme(colorScheme) {
-  return {
-    assetLayer: assetLayer(colorScheme),
-    categoryColors: categoryColors(colorScheme),
-  };
-}
-
-export const DEFAULT_BASEMAP = basemaps.dark;
+export const DEFAULT_BASEMAP_STYLE = basemaps.light;

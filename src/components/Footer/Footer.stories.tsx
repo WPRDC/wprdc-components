@@ -16,4 +16,6 @@ export const Default: React.FC<FooterProps> = props => (
   </Footer>
 );
 
-export const Simple: React.FC<FooterProps> = props => <SimpleFooter />;
+export const Simple: React.FC<FooterProps> = props => (
+  <SimpleFooter {...props} />
+);

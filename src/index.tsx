@@ -1,13 +1,16 @@
-import React, { FC, HTMLAttributes, ReactChild } from 'react';
+/**
+ * index.js
+ *
+ * Top level exports
+ */
 
+/**
+ * Components
+ */
 export { default as Button } from './components/Button';
-
-export interface Props extends HTMLAttributes<HTMLDivElement> {
-  children?: ReactChild;
-}
-
-// Please do not use types off of a default export module or else Storybook Docs will suffer.
-// see: https://github.com/storybookjs/storybook/issues/9556
-export const Thing: FC<Props> = ({ children }) => (
-  <div>{children || `the snozzberries taste like snozzberries`}</div>
-);
+export { default as DataCard } from './components/DataCard';
+export { default as DataSource } from './components/DataSource';
+export { default as Footer } from './components/Footer';
+export { default as Header } from './components/Header';
+export { default as Link } from './components/Link';
+export { default as Map } from './components/Map';

@@ -2,127 +2,174 @@
  *
  * Map
  *
+ * Display stuff on map :check:
+ *
+ *
+ *
  */
 
 import React from 'react';
-// import PropTypes from 'prop-types';
-// import styled from 'styled-components';
-//
-// import InteractiveMap, {
-//   StaticMap,
-//   Source,
-//   Layer,
-//   NavigationControl,
-//   ViewportProps,
-//   ExtraState,
-// } from 'react-map-gl';
-//
-// import { MapProps, ViewportOptions } from 'components/Map/types';
-// import PopUp from './PopUp';
-// import Legend from './Legend';
-//
-// const Map: React.FC<MapProps> = ({
-//   defaultViewport,
-//   sources,
-//   layers,
-//   isStatic,
-//   children,
-//   basemapStyle,
-// }) => {
-//   // Initialization
-//   const ReactMapGL = isStatic ? StaticMap : InteractiveMap;
-//   const startingViewport = { ...DEFAULT_VIEWPORT, ...defaultViewport };
-//
-//   // Internal state
-//   const [viewport, setViewport] = useState<ViewportOptions>(startingViewport);
-//
-//   // Theming
-//   const mapStyle = BasemapStyle[basemapStyle];
-//
-//   // function handleHover(event) {
-//   //   const feature = extractFeatureFromEvent(event);
-//   //   if (feature && feature.properties.id !== popupFeature) {
-//   //     setPopupFeature(feature.properties.id);
-//   //     const [lng, lat] = event.lngLat;
-//   //     setPopup(
-//   //       <PopUp
-//   //         name={feature.properties.name}
-//   //         slug={feature.properties.category}
-//   //         type={feature.properties.asset_type_title}
-//   //         lat={lat}
-//   //         lng={lng}
-//   //         onClose={closePopup}
-//   //       />,
-//   //     );
-//   //   }
-//   //   if (!feature) {
-//   //     setPopup(undefined);
-//   //     setPopupFeature(undefined);
-//   //   }
-//   // }
-//
-//   // function handleClick(event) {
-//   //   const feature = extractFeatureFromEvent(event);
-//   //   if (feature) {
-//   //     onAssetClick(feature.properties.id);
-//   //   }
-//   // }
-//
-//   return <div />;
-//   // <ReactMapGL
-//   //   mapboxApiAccessToken={MAPBOX_API_TOKEN}
-//   //   {...viewport}
-//   //   mapStyle={mapStyle}
-//   //   // onHover={handleHover}
-//   //   // onClick={handleClick}
-//   //   interactiveLayerIds={['asset-points']}
-//   // >
-//   //   {sources.map(source => (
-//   //     <Source {...source} />
-//   //   ))}
-//   //
-//   //   {layers.map(layer => (
-//   //     <Layer {...layer} />
-//   //   ))}
-//   //
-//   //   {children}
-//   //   <ControlDiv>
-//   //     <NavigationControl />
-//   //   </ControlDiv>
-//   // </ReactMapGL>
-// };
-//
-// Map.propTypes = {
-//   defaultViewport: PropTypes.shape({
-//     width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-//     height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-//     latitude: PropTypes.number,
-//     longitude: PropTypes.number,
-//     zoom: PropTypes.number,
-//     pitch: PropTypes.number,
-//   }),
-//   sources: PropTypes.arrayOf(PropTypes.object),
-//   layers: PropTypes.arrayOf(PropTypes.object),
-//   isStatic: PropTypes.bool,
-//   colorScheme: PropTypes.string,
-//   children: PropTypes.node,
-//   onAssetClick: PropTypes.func,
-//   categories: PropTypes.arrayOf(PropTypes.shape(categorySchema)),
-//   filter: PropTypes.array,
-//   searchTerm: PropTypes.string,
-// };
-//
-// Map.defaultProps = {
-//   sources: [],
-//   layers: [],
-// };
-//
-// const ControlDiv = styled.div`
-//   position: absolute;
-//   top: 1rem;
-//   right: 1rem;
-// `;
-//
-// export default Map;
-const Map = ({ label = 'woot' }) => <div>{label}</div>;
+import styled from 'styled-components';
+
+import InteractiveMap, {
+  NavigationControl,
+  ViewportProps,
+  ExtraState,
+  ContextViewportChangeHandler,
+  PointerEvent,
+} from 'react-map-gl';
+
+import { View, Flex } from '@adobe/react-spectrum';
+
+import {
+  MapProps,
+  PopupContentComponent,
+  UserPopupContentProps,
+  ViewportOptions,
+} from './types';
+import { basemaps, DEFAULT_VIEWPORT, DEFAULT_BASEMAP_STYLE } from './settings';
+import { hasFeatures } from './utils';
+import Popup from './Popup';
+
+const Map: React.FC<MapProps> = ({
+  defaultViewport,
+  basemapStyle,
+  children,
+  onViewportChange,
+  onHover,
+  onClick,
+  optionsMenu,
+  legends,
+  hoverPopupContent,
+  hoverPopupContentProps,
+  clickPopupContent,
+  clickPopupContentProps,
+  useFeaturelessEvents,
+  ...otherInteractiveMapProps
+}) => {
+  // Initialization
+  const startingViewport = { ...DEFAULT_VIEWPORT, ...defaultViewport };
+
+  // Internal state
+  const [viewport, setViewport] = React.useState<ViewportOptions>(
+    startingViewport,
+  );
+  const [hoverPopup, setHoverPopup] = React.useState<React.ReactNode>(
+    undefined,
+  );
+  const [clickPopup, setClickPopup] = React.useState<React.ReactNode>(
+    undefined,
+  );
+
+  // Theming
+  const mapStyle = basemapStyle
+    ? basemaps[basemapStyle]
+    : DEFAULT_BASEMAP_STYLE;
+
+  // Wrappers around commonly-used event handlers
+  // todo: handle default behavior, and maybe some premade handlers to plug in in projects
+  //        e.g. a hover popup that covers the most common use cases
+  const handleViewportChange: ContextViewportChangeHandler = (
+    viewState: ViewportProps,
+    interactionState: ExtraState,
+    oldViewState: ViewportProps,
+  ) => {
+    if (onViewportChange) {
+      onViewportChange(viewState, interactionState, oldViewState);
+    }
+    setViewport(viewState);
+  };
+
+  const handleHover = (event: PointerEvent) => {
+    if (useFeaturelessEvents || hasFeatures(event)) {
+      if (onHover) {
+        onHover(event);
+      }
+      if (hoverPopupContent) {
+        setHoverPopup(
+          _makePopup(hoverPopupContent, event, hoverPopupContentProps),
+        );
+      }
+    }
+  };
+
+  const handleClick = (event: PointerEvent) => {
+    if (useFeaturelessEvents || hasFeatures(event)) {
+      if (onClick) {
+        onClick(event);
+      }
+      if (clickPopupContent) {
+        setClickPopup(
+          _makePopup(clickPopupContent, event, clickPopupContentProps),
+        );
+      }
+    }
+  };
+
+  const _makePopup = (
+    ContentComponent: PopupContentComponent,
+    event: PointerEvent,
+    userProps?: UserPopupContentProps,
+  ) => (
+    <Popup longitude={event.lngLat[0]} latitude={event.lngLat[1]}>
+      <ContentComponent
+        event={event}
+        features={event.features}
+        primaryFeatureProps={event.features[0].properties}
+        {...userProps}
+      />
+    </Popup>
+  );
+
+  const StyleProvider = styled.div`
+    .mapboxgl-popup-content {
+      background: none;
+      border: none;
+    }
+  `;
+
+  return (
+    <InteractiveMap
+      {...viewport}
+      mapStyle={mapStyle}
+      onHover={handleHover}
+      onClick={handleClick}
+      onViewportChange={handleViewportChange}
+      {...otherInteractiveMapProps}
+    >
+      <StyleProvider>
+        {hoverPopup}
+        {clickPopup}
+      </StyleProvider>
+      {children}
+      <View
+        id="mapControls"
+        position="absolute"
+        top="size-150"
+        right="size-150"
+      >
+        <Flex direction="row">
+          <View marginX="size-150">{optionsMenu}</View>
+          <View>
+            <NavigationControl />
+          </View>
+        </Flex>
+      </View>
+
+      <View
+        id="mapLegends"
+        position="absolute"
+        bottom="size-400"
+        right="size-200"
+      >
+        {legends}
+      </View>
+    </InteractiveMap>
+  );
+};
+
+Map.defaultProps = {
+  basemapStyle: 'light',
+};
+
 export default Map;

@@ -7,7 +7,7 @@
  */
 
 import React from 'react';
-import { View, Text, Heading, Content, Flex } from '@adobe/react-spectrum';
+import { View, Text, Heading, Flex } from '@adobe/react-spectrum';
 
 import { DataCardProps, DataCardHeaderProps } from './types';
 import DataSource from '../DataSource';

@@ -4,6 +4,6 @@
  *
  **/
 
-export interface HeaderProps {
-  variant: string;
-}
+import { HeaderProps as RSHeaderProps } from '@react-types/view';
+
+export type HeaderProps = RSHeaderProps;

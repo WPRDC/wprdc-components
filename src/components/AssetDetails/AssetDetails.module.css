@@ -1,0 +1,11 @@
+.container {
+  @apply border border-gray-500 p-2;
+}
+
+.tabs {
+  @apply pt-0.5 pb-1.5;
+}
+
+.content {
+  @apply py-2;
+}

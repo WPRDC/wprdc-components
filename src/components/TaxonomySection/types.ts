@@ -1,0 +1,34 @@
+/**
+ *
+ * TaxonomySection types
+ *
+ **/
+import { DataVizBase, GeogIdentifier, Indicator, Taxonomy } from '../../types';
+import { FC, Key } from 'react';
+import { BreadcrumbItemLinkProps } from '../Breadcrumbs';
+
+export interface TaxonomySectionProps extends SectionSharedProps {
+  taxonomy: Taxonomy;
+
+  currentDomainSlug?: string;
+  currentDomainHref?: string;
+
+  currentSubdomainSlug?: string;
+  currentSubdomainHref?: string;
+
+  currentIndicatorSlug?: string;
+  currentIndicatorHref?: string;
+
+  currentDataVizSlug?: string;
+  currentDataVizHref?: string;
+
+  LinkComponent?: FC<BreadcrumbItemLinkProps>;
+
+  onTabsChange?: (tab: Key) => any;
+}
+
+export interface SectionSharedProps {
+  geog?: GeogIdentifier;
+  onExploreIndicator?: (indicator: Indicator) => unknown;
+  onExploreDataViz?: (dataViz: DataVizBase) => unknown;
+}

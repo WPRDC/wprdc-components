@@ -1,0 +1,10 @@
+.container {
+}
+
+.popover {
+  @apply bg-background p-2.5 border shadow-lg;
+}
+
+.popoverTitle {
+  @apply font-semibold;
+}

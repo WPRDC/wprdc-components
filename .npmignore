@@ -1,2 +1,4 @@
 example/
 *.stories.tsx
+
+src/icons

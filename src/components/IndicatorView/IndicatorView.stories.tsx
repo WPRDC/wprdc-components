@@ -1,5 +1,10 @@
 import React, { useEffect } from 'react';
-import { IndicatorView, IndicatorViewProps } from './';
+import {
+  ConnectedIndicatorView,
+  ConnectedIndicatorViewProps,
+  IndicatorView,
+  IndicatorViewProps,
+} from './';
 import { Story } from '@storybook/react';
 
 import {
@@ -136,6 +141,22 @@ const Template: Story<IndicatorViewProps> = (args) => {
       <IndicatorView {...args} />
     </>
   );
+};
+
+const ConnectedTemplate: Story<ConnectedIndicatorViewProps> = (args) => {
+  const context = useProvider();
+  useEffect(() => context.fetchAndSetGeog(DEFAULT_GEOG), []);
+
+  return (
+    <>
+      <ConnectedIndicatorView {...args} />
+    </>
+  );
+};
+
+export const Connected = ConnectedTemplate.bind({});
+Connected.args = {
+  indicatorSlug: 'pop-by-race',
 };
 
 export const Details = Template.bind({});

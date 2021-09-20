@@ -20,6 +20,7 @@ import {
   RiTableFill,
 } from 'react-icons/ri';
 import { DataVizType } from '../../../types';
+import { Skeleton } from './Skeleton';
 
 export function DataVizCard(props: DataVizCardProps) {
   const {
@@ -57,6 +58,12 @@ export function DataVizCard(props: DataVizCardProps) {
     }
   }, [vizType]);
 
+  console.log({ isLoading });
+
+  if (isLoading) {
+    return <Skeleton />;
+  }
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.header}>
@@ -64,7 +71,7 @@ export function DataVizCard(props: DataVizCardProps) {
           <Icon className={styles.typeIcon} />
           <span>{vizType}</span>
         </div>
-        <h6 className={styles.title}>{name}</h6>mk
+        <h6 className={styles.title}>{name}</h6>
         <p className={styles.description}>{description}</p>
       </div>
       <div className={styles.dataViz}>

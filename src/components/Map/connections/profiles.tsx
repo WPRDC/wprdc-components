@@ -29,7 +29,7 @@ export const profilesConnection: MapPluginConnection<
 
     if (!!items && !!geography) {
       const requests = items.map((item) =>
-        ProfilesAPI.requestDataViz<DownloadedMiniMap>(item, geography)
+        ProfilesAPI.requestDataViz<DownloadedMiniMap>(item.slug, geography)
       );
 
       // for each one, if there is response data, then put it in the list for setSources
@@ -53,7 +53,7 @@ export const profilesConnection: MapPluginConnection<
 
     if (!!items && !!geography) {
       const requests = items.map((item) =>
-        ProfilesAPI.requestDataViz<DownloadedMiniMap>(item, geography)
+        ProfilesAPI.requestDataViz<DownloadedMiniMap>(item.slug, geography)
       );
       // for each one, if there is response data, then put it in the list for setSources
       Promise.all(requests).then((response) =>
@@ -75,7 +75,7 @@ export const profilesConnection: MapPluginConnection<
 
     if (!!items && !!geography) {
       const requests = items.map((item) =>
-        ProfilesAPI.requestDataViz<DownloadedMiniMap>(item, geography)
+        ProfilesAPI.requestDataViz<DownloadedMiniMap>(item.slug, geography)
       );
       // for each one, if there is response data, then put it in the list for setSources
       Promise.all(requests).then((response) =>

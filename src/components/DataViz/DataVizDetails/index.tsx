@@ -10,6 +10,8 @@ import { LoadingMessage } from '../../LoadingMessage';
 import { MissingVizMessage } from '../../MissingVizMessage';
 import { DataVizDetailsProps } from '../types';
 import { Heading } from '../../Heading';
+import classNames from 'classnames';
+import { DataVizType } from '../../../types';
 
 export function DataVizDetails(props: DataVizDetailsProps) {
   const {
@@ -46,9 +48,14 @@ export function DataVizDetails(props: DataVizDetailsProps) {
       >
         {({ measureRef }) => (
           <div ref={measureRef}>
-            <div className="h-64 p-1.5" aria-label="data presentation">
+            <div
+              className={classNames('p-2', {
+                'h-80': dataViz?.vizType === DataVizType.Chart,
+              })}
+              aria-label="data presentation"
+            >
               {!!error && <MissingVizMessage error={error} />}
-              {isLoading && <LoadingMessage />}
+              {isLoading && <LoadingMessage name={dataViz && dataViz.name} />}
               {!isLoading && !!CurrentViz && !!dataViz && !!geogIdentifier && (
                 <CurrentViz
                   dataViz={dataViz}

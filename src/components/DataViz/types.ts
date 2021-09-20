@@ -66,7 +66,7 @@ export interface DataVizCardProps extends VizWrapperProps {}
 export interface DataVizStyleProps {}
 
 export interface ConnectedDataVizProps {
-  dataVizID?: DataVizID;
+  dataVizSlug?: string;
   geogIdentifier?: GeogIdentifier;
   variant: DataVizVariant;
   onExplore?: (dataViz: DataVizBase) => unknown;

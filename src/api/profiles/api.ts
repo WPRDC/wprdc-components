@@ -8,13 +8,13 @@
 import { createAPI, Method, ResponsePackage } from '../api';
 import {
   DataVizBase,
-  DataVizID,
   Downloaded,
   Geog,
   GeogDescriptor,
   GeogIdentifier,
   GeographyType,
   GeogTypeDescriptor,
+  Indicator,
   Taxonomy,
 } from '../../types';
 
@@ -23,7 +23,7 @@ const HOST = 'https://api.profiles.wprdc.org';
 enum Endpoint {
   Domain = 'domain',
   // Subdomain = 'subdomain', // might not be necessary to use here
-  // Indicator = 'indicator', //   or here
+  Indicator = 'indicator', //   or here
   DataViz = 'data-viz',
   Geog = 'geo',
   GeogTypes = 'geo/geog-types',
@@ -38,6 +38,12 @@ function requestTaxonomy() {
   );
 }
 
+function requestIndicator(slug: string) {
+  return api.callAndProcessEndpoint<Indicator>(Endpoint.Indicator, Method.GET, {
+    id: slug,
+  });
+}
+
 function requestGeoLayers() {
   return api.callAndProcessEndpoint<GeogTypeDescriptor[]>(
     Endpoint.GeogTypes,
@@ -46,12 +52,12 @@ function requestGeoLayers() {
 }
 
 function requestDataViz<T extends Downloaded<DataVizBase>>(
-  dataVizID: DataVizID,
+  dataVizSlug: string,
   geogIdentifier: GeogIdentifier
 ): Promise<ResponsePackage<T>> {
   const { geogType, geogID } = geogIdentifier;
   return api.callAndProcessEndpoint<T>(Endpoint.DataViz, Method.GET, {
-    id: dataVizID.id,
+    id: dataVizSlug,
     params: { geogType: geogType, geogID: geogID },
   });
 }
@@ -82,4 +88,5 @@ export const ProfilesAPI = {
   requestDataViz,
   requestGeogDetails: requestGeogDescription,
   requestGeogList,
+  requestIndicator,
 };

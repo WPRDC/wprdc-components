@@ -2,16 +2,16 @@ import { ProfilesAPI } from './api';
 import { useEffect, useState } from 'react';
 import {
   DataVizBase,
-  DataVizID,
   Downloaded,
   Geog,
   GeogIdentifier,
   GeographyType,
+  Indicator,
 } from '../../types';
 import { ResponsePackage } from '../api';
 
 export function useDataViz(
-  dataVizID?: DataVizID,
+  dataVizSlug?: string,
   geogIdentifier?: GeogIdentifier
 ) {
   const [dataViz, setDataViz] = useState<Downloaded<DataVizBase>>();
@@ -28,17 +28,40 @@ export function useDataViz(
       setIsLoading(false);
     }
 
-    if (!!dataVizID?.id && !!geogIdentifier?.geogID) {
+    if (!!dataVizSlug && !!geogIdentifier?.geogID) {
       setIsLoading(true);
-      ProfilesAPI.requestDataViz(dataVizID, geogIdentifier).then(
+      ProfilesAPI.requestDataViz(dataVizSlug, geogIdentifier).then(
         handleResponse
       );
     }
 
     return function cleanup() {};
-  }, [dataVizID, geogIdentifier]);
+  }, [dataVizSlug, geogIdentifier]);
 
   return { dataViz, error, isLoading };
+}
+
+export function useIndicator(indicatorSlug?: string) {
+  const [indicator, setIndicator] = useState<Indicator>();
+  const [isLoading, setIsLoading] = useState<boolean>();
+  const [error, setError] = useState<string>();
+
+  useEffect(() => {
+    function handleResponse({ data, error }: ResponsePackage<Indicator>) {
+      setIndicator(data);
+      setError(error);
+      setIsLoading(false);
+    }
+
+    if (!!indicatorSlug) {
+      setIsLoading(true);
+      ProfilesAPI.requestIndicator(indicatorSlug).then(handleResponse);
+    }
+
+    return function cleanup() {};
+  }, [indicatorSlug]);
+
+  return { indicator, isLoading, error };
 }
 
 export function useGeography(geogType?: GeographyType, geogID?: string) {

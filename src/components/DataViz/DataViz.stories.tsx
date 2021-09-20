@@ -8,6 +8,7 @@ import {
   GeogIdentifier,
   GeographyType,
 } from '../../types';
+import { Skeleton } from './DataVizCard/Skeleton';
 
 export default {
   title: 'Data Viz',
@@ -54,6 +55,8 @@ const geog: GeogIdentifier = {
 const Template: Story<ConnectedDataVizProps> = (args) => (
   <ConnectedDataViz {...args} />
 );
+
+export const CardSkeleton = () => <Skeleton />;
 
 export const Card = Template.bind({});
 

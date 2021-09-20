@@ -1,4 +1,4 @@
-import { DataViz } from './DataViz';
+import DataViz from './DataViz';
 
 export { ConnectedDataViz } from './ConnectedDataViz';
 export * from './types';

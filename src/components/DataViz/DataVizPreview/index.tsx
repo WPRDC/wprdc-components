@@ -8,9 +8,11 @@ import '../../../styles/global.css';
 import Measure from 'react-measure';
 import { DataVizPreviewProps } from '../types';
 import { MissingVizMessage } from '../../MissingVizMessage';
+import { LoadingMessage } from '../../LoadingMessage';
 
 export const DataVizPreview = memo((props: DataVizPreviewProps) => {
-  const { dataViz, geogIdentifier, colorScheme, CurrentViz, error } = props;
+  const { dataViz, geogIdentifier, colorScheme, CurrentViz, isLoading, error } =
+    props;
 
   /* Keep track fo dimensions to send to vega charts */
   const [{ width, height }, setDimensions] = React.useState({
@@ -32,8 +34,9 @@ export const DataVizPreview = memo((props: DataVizPreviewProps) => {
             className="rounded min-h-0 flex-grow"
             aria-label="data presentation preview"
           >
+            {isLoading && <LoadingMessage name="preview" />}
             {!!error && <MissingVizMessage error={error} />}
-            {!!CurrentViz && dataViz && !!geogIdentifier && (
+            {!!CurrentViz && !!dataViz && !!geogIdentifier && (
               <CurrentViz
                 inPreview
                 dataViz={dataViz}

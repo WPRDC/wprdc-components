@@ -15,13 +15,19 @@ import { Button } from '../Button';
 import { ConnectedDataViz, DataVizVariant } from '../DataViz';
 import classNames from 'classnames';
 import { DataVizID, DataVizType } from '../../types';
+import LoadingMessage from '../LoadingMessage';
 
 export const IndicatorView: React.FC<IndicatorViewProps> = ({
   indicator,
+  geogIdentifier,
   card,
   onExploreDataViz,
   onExploreIndicator,
+  isLoading,
 }) => {
+  if (!!isLoading) return <LoadingMessage />;
+  if (!indicator) return <div />;
+
   const {
     name,
     description,
@@ -32,7 +38,7 @@ export const IndicatorView: React.FC<IndicatorViewProps> = ({
     // source,
     // provenance,
     dataVizes,
-  } = indicator;
+  } = indicator || {};
 
   // load first data viz (will eventually be some sort of master one or something)
   const primaryDataViz = !!dataVizes && dataVizes[0];
@@ -50,7 +56,7 @@ export const IndicatorView: React.FC<IndicatorViewProps> = ({
   );
 
   function handleExploreIndicator() {
-    if (onExploreIndicator) onExploreIndicator(indicator);
+    if (!!onExploreIndicator && !!indicator) onExploreIndicator(indicator);
   }
 
   return (
@@ -63,7 +69,7 @@ export const IndicatorView: React.FC<IndicatorViewProps> = ({
             <ConnectedDataViz
               variant={DataVizVariant.Preview}
               key={primaryDataViz.slug}
-              dataVizID={primaryDataViz}
+              dataVizSlug={primaryDataViz.slug}
               onExplore={onExploreDataViz}
             />
           )}
@@ -98,34 +104,40 @@ export const IndicatorView: React.FC<IndicatorViewProps> = ({
 
       {!card && (
         <>
-          <div className={styles.blurbs}>
-            <h6 className={styles.subtitle}>Quick Facts</h6>
-            <ul className={styles.blurbList}>
-              {blurbs.map((blurb) => (
-                <li className={styles.blurbListItem}>
-                  <ConnectedDataViz
-                    variant={DataVizVariant.Blurb}
-                    dataVizID={blurb}
-                    onExplore={onExploreDataViz}
-                  />
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div className={styles.vizes}>
-            <h6 className={styles.subtitle}>Tables and Visualizations</h6>
-            <ul className={styles.vizList}>
-              {vizes.map((viz) => (
-                <li className={styles.vizListItem}>
-                  <ConnectedDataViz
-                    variant={DataVizVariant.Card}
-                    dataVizID={viz}
-                    onExplore={onExploreDataViz}
-                  />
-                </li>
-              ))}
-            </ul>
-          </div>
+          {!!blurbs && !!blurbs.length && (
+            <div className={styles.blurbs}>
+              <h6 className={styles.subtitle}>Quick Facts</h6>
+              <ul className={styles.blurbList}>
+                {blurbs.map((blurb) => (
+                  <li className={styles.blurbListItem}>
+                    <ConnectedDataViz
+                      geogIdentifier={geogIdentifier}
+                      variant={DataVizVariant.Blurb}
+                      dataVizSlug={blurb.slug}
+                      onExplore={onExploreDataViz}
+                    />
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+          {!!vizes && !!vizes.length && (
+            <div className={styles.vizes}>
+              <h6 className={styles.subtitle}>Tables and Visualizations</h6>
+              <ul className={styles.vizList}>
+                {vizes.map((viz) => (
+                  <li className={styles.vizListItem}>
+                    <ConnectedDataViz
+                      geogIdentifier={geogIdentifier}
+                      variant={DataVizVariant.Card}
+                      dataVizSlug={viz.slug}
+                      onExplore={onExploreDataViz}
+                    />
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
         </>
       )}
       {card && (
@@ -140,7 +152,6 @@ export const IndicatorView: React.FC<IndicatorViewProps> = ({
           </div>
         </>
       )}
-      {!card && <div></div>}
     </div>
   );
 };

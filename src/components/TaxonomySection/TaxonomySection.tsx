@@ -116,7 +116,7 @@ export const TaxonomySection: React.FC<TaxonomySectionProps> = ({
         {!!currentDataViz && (
           <ConnectedDataViz
             variant={DataVizVariant.Details}
-            dataVizID={currentDataViz}
+            dataVizSlug={currentDataViz.slug}
             geogIdentifier={geog}
             onExplore={onExploreDataViz}
           />

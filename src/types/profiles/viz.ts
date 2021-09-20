@@ -167,7 +167,7 @@ export interface VizWrapperProps {
   error?: string;
   geogIdentifier?: GeogIdentifier;
   colorScheme: ColorScheme;
-  menu: JSX.Element;
+  menu?: JSX.Element;
   dataViz?: Downloaded<DataVizBase>;
   CurrentViz?: React.FC<VizProps<DataVizBase, DataVizData>>;
   breadcrumbs?: JSX.Element[];

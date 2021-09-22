@@ -7,7 +7,6 @@ import React from 'react';
 import '../../styles/global.css';
 
 // import styles from './MiniMap.module.css';
-
 import {
   LayerPanelVariant,
   Map,

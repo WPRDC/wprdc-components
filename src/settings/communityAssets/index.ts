@@ -3,7 +3,15 @@
  */
 // noinspection SqlResolve
 
-export const ASSETS_CARTO_SQL = `SELECT id, cartodb_id, name, asset_type, asset_type_title,category, the_geom, the_geom_webmercator FROM wprdc.assets_v1`;
+export const ASSETS_CARTO_SQL = `SELECT id,
+                                        cartodb_id,
+                                        name,
+                                        asset_type,
+                                        asset_type_title,
+                                        category,
+                                        the_geom,
+                                        the_geom_webmercator
+                                 FROM wprdc.assets_v1`;
 
 export const DEFAULT_ASSET_TYPES = [
   {

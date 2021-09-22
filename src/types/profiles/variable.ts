@@ -25,8 +25,6 @@ export interface VariableBase extends Described {
   resourcetype: VariableResourceType;
 }
 
-
-
 type VizVariableOptions = Record<string, any>;
 
 export enum VariableResourceType {

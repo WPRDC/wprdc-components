@@ -10,12 +10,12 @@ import {
   DataVizBase,
   Downloaded,
   Geog,
-  GeographyType,
-  GeogLevel,
-  Indicator,
-  Taxonomy,
   GeogBrief,
   GeogIdentifier,
+  GeogLevel,
+  GeographyType,
+  Indicator,
+  Taxonomy,
 } from '../../types';
 
 const HOST = 'https://api.profiles.wprdc.org';

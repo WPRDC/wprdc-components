@@ -5,7 +5,9 @@ import { StatelessListBox } from './StatelessListBox';
 
 export function ListBox<T extends object>(props: ListBoxProps<T>): JSX.Element {
   const state = useTreeState<T>(props);
-  return <StatelessListBox {...props} state={state} />;
+  let listBoxRef = React.useRef<HTMLUListElement>(null);
+
+  return <StatelessListBox listBoxRef={listBoxRef} {...props} state={state} />;
 }
 
 export default ListBox;

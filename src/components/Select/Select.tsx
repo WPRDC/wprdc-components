@@ -20,6 +20,9 @@ export function Select<T extends object>(props: SelectProps<T>) {
       onSelection(state.collection.getItem(key).value);
     }
   };
+
+  const listBoxRef = React.useRef<HTMLUListElement>(null);
+
   const onSelectionChange = props.onSelectionChange || selectionShim;
   let state = useSelectState({ ...props, onSelectionChange });
 
@@ -80,6 +83,7 @@ export function Select<T extends object>(props: SelectProps<T>) {
         <Popover isOpen={state.isOpen} onClose={state.close}>
           <StatelessListBox<T>
             fullWidth
+            listBoxRef={listBoxRef}
             {...(menuProps as AriaListBoxOptions<T>)}
             state={state}
           />

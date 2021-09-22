@@ -4,6 +4,4 @@
  *
  **/
 
-export interface MenuItemProps {
-
-}
+export interface MenuItemProps {}

@@ -1,6 +1,7 @@
 .container {
   @apply flex;
 }
+
 .markerSection {
   @apply mr-0.5 flex content-center justify-center text-gray-600;
 }

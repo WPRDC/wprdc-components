@@ -3,11 +3,11 @@
  * Indicator types
  *
  **/
-import { DataVizBase, GeogIdentifier, Indicator } from '../../types';
+import { DataVizBase, GeogBrief, Indicator } from '../../types';
 
 export interface IndicatorViewProps {
   indicator?: Indicator;
-  geogIdentifier?: GeogIdentifier;
+  geog?: GeogBrief;
   card?: boolean;
   isLoading?: boolean;
   onExploreIndicator?: (indicator: Indicator) => unknown;

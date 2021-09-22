@@ -19,7 +19,7 @@ import LoadingMessage from '../LoadingMessage';
 
 export const IndicatorView: React.FC<IndicatorViewProps> = ({
   indicator,
-  geogIdentifier,
+  geog,
   card,
   onExploreDataViz,
   onExploreIndicator,
@@ -111,7 +111,7 @@ export const IndicatorView: React.FC<IndicatorViewProps> = ({
                 {blurbs.map((blurb) => (
                   <li className={styles.blurbListItem}>
                     <ConnectedDataViz
-                      geogIdentifier={geogIdentifier}
+                      geog={geog}
                       variant={DataVizVariant.Blurb}
                       dataVizSlug={blurb.slug}
                       onExplore={onExploreDataViz}
@@ -128,7 +128,7 @@ export const IndicatorView: React.FC<IndicatorViewProps> = ({
                 {vizes.map((viz) => (
                   <li className={styles.vizListItem}>
                     <ConnectedDataViz
-                      geogIdentifier={geogIdentifier}
+                      geog={geog}
                       variant={DataVizVariant.Card}
                       dataVizSlug={viz.slug}
                       onExplore={onExploreDataViz}

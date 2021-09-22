@@ -79,6 +79,8 @@ export function SearchBox<T extends object>(props: SearchBoxProps<T>) {
     }
   }, [props.loadingState]);
 
+  console.log(props.label, { listBoxRef, listBoxProps });
+
   return (
     <div className={styles.container}>
       {props.label && (
@@ -102,6 +104,7 @@ export function SearchBox<T extends object>(props: SearchBoxProps<T>) {
           <RiCloseLine aria-hidden="true" className="w-4 h-4" />
         </button>
       </div>
+
       {state.isOpen && (
         <Popover
           popoverRef={popoverRef}
@@ -110,8 +113,8 @@ export function SearchBox<T extends object>(props: SearchBoxProps<T>) {
         >
           <StatelessListBox<T>
             fullWidth
-            {...listBoxProps}
             listBoxRef={listBoxRef}
+            {...listBoxProps}
             state={state}
             isLoading={isLoading}
           />

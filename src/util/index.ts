@@ -1,5 +1,6 @@
 import { ColorScheme } from '../types';
 
+export * from './formatters';
 export * from './hooks';
 
 export const userPrefersDark =

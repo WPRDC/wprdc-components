@@ -11,8 +11,7 @@ import { MissingVizMessage } from '../../MissingVizMessage';
 import { LoadingMessage } from '../../LoadingMessage';
 
 export const DataVizPreview = memo((props: DataVizPreviewProps) => {
-  const { dataViz, geogIdentifier, colorScheme, CurrentViz, isLoading, error } =
-    props;
+  const { dataViz, geog, colorScheme, CurrentViz, isLoading, error } = props;
 
   /* Keep track fo dimensions to send to vega charts */
   const [{ width, height }, setDimensions] = React.useState({
@@ -36,11 +35,11 @@ export const DataVizPreview = memo((props: DataVizPreviewProps) => {
           >
             {isLoading && <LoadingMessage name="preview" />}
             {!!error && <MissingVizMessage error={error} />}
-            {!!CurrentViz && !!dataViz && !!geogIdentifier && (
+            {!!CurrentViz && !!dataViz && !!geog && (
               <CurrentViz
                 inPreview
                 dataViz={dataViz}
-                geog={geogIdentifier}
+                geog={geog}
                 colorScheme={colorScheme}
                 vizHeight={height - 15}
                 vizWidth={width - 35}

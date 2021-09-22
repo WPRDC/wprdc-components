@@ -1,13 +1,8 @@
-import { Described } from './common';
-
-export interface Geog extends Described, GeogBase {
-  title: string;
-  hierarchy: GeogDescriptor[];
-  resourcetype: string; // todo: make enums of the resourcetypes for use here.
-  population: number;
-  geogType: GeographyType;
-  geogID: string;
+export interface Geog extends GeogBase {
+  hierarchy: GeogBrief[];
 }
+
+export interface GeogBrief extends GeogBase {}
 
 export enum GeographyType {
   BlockGroup = 'blockGroup',
@@ -20,34 +15,23 @@ export enum GeographyType {
   State = 'state',
 }
 
-export interface GeogTypeDescriptor {
+export interface GeogLevel {
   name: string;
   id: GeographyType;
   tableName: string;
   cartoSql: string;
   description: string;
-}
-
-export interface GeogLoadPayload {
-  geogType: GeographyType;
-  geogs: GeogDescriptor[];
-}
-
-export interface GeogDescriptor extends GeogIdentifier {
-  id: string | number;
-  title: string;
+  defaultGeog: GeogBrief;
 }
 
 export interface GeogIdentifier {
-  id: string | number;
-  title?: string;
-  name?: string;
   geogType: GeographyType;
   geogID: string;
 }
 
-export interface GeogBase {
+export interface GeogBase extends GeogIdentifier {
+  id: number;
   name: string;
-  slug: string;
+  title: string;
   description?: string;
 }

@@ -15,7 +15,7 @@ import {
   Divider,
   GeogIdentifier,
   GeographyType,
-  GeogTypeDescriptor,
+  GeogLevel,
   LayerPanelVariant,
   Map,
   MapEventExtras,
@@ -105,7 +105,7 @@ const chartViz = {
   },
 };
 
-const menuLayers: GeogTypeDescriptor[] = [
+const menuLayers: GeogLevel[] = [
   {
     id: GeographyType.BlockGroup,
     name: 'Block Group',

@@ -1,4 +1,5 @@
 import SearchBox from './SearchBox';
+
 export * from './SearchBox';
 export * from './types';
 export * from './connections';

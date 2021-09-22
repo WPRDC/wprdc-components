@@ -4,16 +4,13 @@ import {
   DataVizBase,
   Downloaded,
   Geog,
-  GeogIdentifier,
+  GeogBrief,
   GeographyType,
   Indicator,
 } from '../../types';
 import { ResponsePackage } from '../api';
 
-export function useDataViz(
-  dataVizSlug?: string,
-  geogIdentifier?: GeogIdentifier
-) {
+export function useDataViz(dataVizSlug?: string, geog?: GeogBrief) {
   const [dataViz, setDataViz] = useState<Downloaded<DataVizBase>>();
   const [isLoading, setIsLoading] = useState<boolean>();
   const [error, setError] = useState<string>();
@@ -28,15 +25,13 @@ export function useDataViz(
       setIsLoading(false);
     }
 
-    if (!!dataVizSlug && !!geogIdentifier?.geogID) {
+    if (!!dataVizSlug && !!geog?.geogID) {
       setIsLoading(true);
-      ProfilesAPI.requestDataViz(dataVizSlug, geogIdentifier).then(
-        handleResponse
-      );
+      ProfilesAPI.requestDataViz(dataVizSlug, geog).then(handleResponse);
     }
 
     return function cleanup() {};
-  }, [dataVizSlug, geogIdentifier]);
+  }, [dataVizSlug, geog]);
 
   return { dataViz, error, isLoading };
 }

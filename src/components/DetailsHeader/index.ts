@@ -1,5 +1,5 @@
-import DetailsHeader from './DetailsHeader'
+import DetailsHeader from './DetailsHeader';
 
 export * from './DetailsHeader';
 export * from './types';
-export default DetailsHeader
+export default DetailsHeader;

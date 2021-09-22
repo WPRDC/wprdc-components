@@ -9,8 +9,7 @@ import { DataVizMiniProps } from '../types';
 import { MissingVizMessage } from '../../MissingVizMessage';
 
 export const DataVizMini = memo((props: DataVizMiniProps) => {
-  const { dataViz, geogIdentifier, colorScheme, CurrentViz, isLoading, error } =
-    props;
+  const { dataViz, geog, colorScheme, CurrentViz, isLoading, error } = props;
 
   /* Keep track fo dimensions to send to vega charts */
   const [{ width, height }, setDimensions] = React.useState({
@@ -34,10 +33,10 @@ export const DataVizMini = memo((props: DataVizMiniProps) => {
             >
               {!!error && <MissingVizMessage error={error} />}
               {isLoading && <div className="">Loading...</div>}
-              {!error && !!CurrentViz && !!dataViz && !!geogIdentifier && (
+              {!error && !!CurrentViz && !!dataViz && !!geog && (
                 <CurrentViz
                   dataViz={dataViz}
-                  geog={geogIdentifier}
+                  geog={geog}
                   colorScheme={colorScheme}
                   vizHeight={height - 15}
                   vizWidth={width - 35}

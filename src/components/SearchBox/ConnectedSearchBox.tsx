@@ -28,6 +28,8 @@ export function ConnectedSearchBox<T extends object>(
     }
   }
 
+  console.log({ list });
+
   return (
     <SearchBox<T>
       label={label}

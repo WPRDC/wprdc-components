@@ -8,12 +8,7 @@ import { Described } from './common';
 import { TimeAxis } from './time';
 import { VizVariable } from './variable';
 import { LayerProps, SourceProps } from 'react-map-gl';
-import {
-  ColorScheme,
-  GeogDescriptor,
-  GeogIdentifier,
-  SourceBase,
-} from './index';
+import { ColorScheme, Geog, GeogBrief, SourceBase } from './index';
 import React, { PropsWithChildren } from 'react';
 
 import { Column } from 'react-table';
@@ -111,7 +106,7 @@ export type Downloaded<
   data: D;
   options: O;
   error: ErrorRecord;
-  geog: GeogDescriptor;
+  geog: Geog;
 };
 
 export interface TableViz extends DataVizBase {
@@ -153,7 +148,7 @@ export type VizProps<
 > = PropsWithChildren<
   {
     dataViz: Downloaded<T, D>;
-    geog: GeogIdentifier;
+    geog: GeogBrief;
     colorScheme?: ColorScheme;
     vizHeight?: number;
     vizWidth?: number;
@@ -164,8 +159,9 @@ export type VizProps<
 
 export interface VizWrapperProps {
   isLoading: boolean;
+  showGeog?: boolean;
   error?: string;
-  geogIdentifier?: GeogIdentifier;
+  geog?: GeogBrief;
   colorScheme: ColorScheme;
   menu?: JSX.Element;
   dataViz?: Downloaded<DataVizBase>;

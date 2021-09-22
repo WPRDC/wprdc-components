@@ -3,7 +3,7 @@
  * @param {number} value
  */
 import * as React from 'react';
-import { Variable } from '../types';
+import { GeogBrief, GeographyType, Variable } from '../types';
 
 export function formatPercent(value?: number): React.ReactNode {
   if (typeof value === 'number')
@@ -31,4 +31,38 @@ export function formatCategory(variable: Variable): React.ReactNode {
       {category}
     </p>
   );
+}
+
+/**
+ * Returns string containing the common name of a location.
+ * @param geog
+ */
+export function getGeogIDTitle(geog: GeogBrief): string {
+  switch (geog.geogType) {
+    case GeographyType.County:
+      return `${geog.name} County`;
+    case GeographyType.Tract:
+      return `Tract ${geog.geogID}`;
+    case GeographyType.BlockGroup:
+      return `Block Group ${geog.geogID}`;
+    default:
+      return geog.name || '';
+  }
+}
+
+/**
+ * Convert an object of paramaters ({param1: value1, etc...}) for a request to
+ * a query string ("?param1=value1&p2=v2...")
+ *
+ * @param {Object} params - object of key value pairs of parameters
+ * @returns {string} - url query string representation of `params`
+ */
+export function serializeParams(params?: object) {
+  if (!params || !Object.keys(params)) return '';
+  return `?${Object.entries(params)
+    .map(
+      ([key, value]) =>
+        `${encodeURIComponent(key)}=${encodeURIComponent(value)}`
+    )
+    .join('&')}`;
 }

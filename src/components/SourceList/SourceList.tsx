@@ -28,12 +28,12 @@ export function SourceList(props: Props) {
             <Tooltip
               title={source.name}
               content={
-                <>
+                <div className={styles.popover}>
                   <Link external href={source.infoLink}>
                     {source.infoLink}
                   </Link>
                   <p>{source.description}</p>
-                </>
+                </div>
               }
             >
               <DataChip value={source.name} icon="database" color="primary" />

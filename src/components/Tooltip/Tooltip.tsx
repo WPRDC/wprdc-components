@@ -70,7 +70,7 @@ const TooltipPopover = React.forwardRef<HTMLDivElement, TooltipPopoverProps>(
 export function Tooltip(props: TooltipProps) {
   const { children, content, popoverProps, title, size } = props;
 
-  const state = useOverlayTriggerState({});
+  const state = useOverlayTriggerState(props);
 
   const triggerRef = React.useRef(null);
   const overlayRef = React.useRef(null);

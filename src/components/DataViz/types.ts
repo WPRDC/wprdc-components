@@ -1,9 +1,8 @@
 import {
   DataVizBase,
   DataVizData,
-  DataVizID,
   Downloaded,
-  GeogIdentifier,
+  GeogBrief,
   VizMenuItem,
   VizWrapperProps,
 } from '../../types';
@@ -25,11 +24,6 @@ export interface DataVizDataRecord<
 }
 
 export type DataVizDataCache = Record<string, DataVizDataRecord>;
-
-export interface DataVizRequest {
-  dataVizID: DataVizID;
-  geogIdentifier: GeogIdentifier;
-}
 
 export type ContainerState = DataVizState;
 
@@ -67,7 +61,8 @@ export interface DataVizStyleProps {}
 
 export interface ConnectedDataVizProps {
   dataVizSlug?: string;
-  geogIdentifier?: GeogIdentifier;
+  geog?: GeogBrief;
   variant: DataVizVariant;
+  showGeog?: boolean;
   onExplore?: (dataViz: DataVizBase) => unknown;
 }

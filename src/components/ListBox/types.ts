@@ -27,10 +27,7 @@ export interface StatelessListBoxProps<T>
     ListBoxBase {
   /** Externally-managed state to render in the ListBox */
   state: ListState<T>;
-
-  /** Optional externally provided ref object. otherwise a default ref is made.*/
-  listBoxRef?: RefObject<HTMLUListElement>;
-
+  listBoxRef: RefObject<HTMLUListElement>;
   isLoading?: boolean;
 }
 

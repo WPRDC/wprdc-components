@@ -21,9 +21,9 @@ import { AssetMapProperties, AssetType } from '../../types/communityAssets';
 import {
   ColorScheme,
   DataVizID,
-  GeogIdentifier,
+  GeogBrief,
+  GeogLevel,
   GeographyType,
-  GeogTypeDescriptor,
   ProfilesMapProperties,
 } from '../../types';
 
@@ -110,10 +110,10 @@ export interface MapProps extends InteractiveMapProps {
 
   defaultSelectedAssetLayers?: Selection;
 
-  menuGeogTypes?: GeogTypeDescriptor[];
+  menuGeogTypes?: GeogLevel[];
 
   menuGeogTypesSelection?: Selection;
-  selectedGeog?: GeogIdentifier;
+  selectedGeog?: GeogBrief;
 
   onHover?: (evt: MapEvent, extras?: MapEventExtras) => void;
   onClick?: (evt: MapEvent, extras?: MapEventExtras) => void;
@@ -191,7 +191,7 @@ export interface PopupProps extends RMGPopupProps {}
 export interface ExtendedPopupProps extends PopupProps {
   assets?: AssetMapProperties[];
   profiles?: any;
-  menuGeog?: GeogIdentifier;
+  menuGeog?: GeogBrief;
 }
 
 export interface HoverPopupProps extends ExtendedPopupProps {}
@@ -201,7 +201,7 @@ export interface ClickPopupProps extends HoverPopupProps {}
 export interface MapEventExtras {
   assets: AssetMapProperties[];
   profiles: any;
-  menuGeog?: GeogIdentifier;
+  menuGeog?: GeogBrief;
 }
 
 export interface PopupSectionProps {
@@ -259,7 +259,7 @@ export interface MenuLayerItem {
 
 export interface MapPluginGetterOptions extends Record<string, any> {
   colorScheme?: ColorScheme;
-  geography?: GeogIdentifier;
+  geography?: GeogBrief;
 }
 
 export type MapPluginGetter<T, R> = (
@@ -336,7 +336,7 @@ export interface PluginToolbox<T, E> {
 }
 
 export type AssetToolbox = PluginToolbox<AssetType, AssetMapProperties>;
-export type MenuToolbox = PluginToolbox<GeogTypeDescriptor, GeogIdentifier>;
+export type MenuToolbox = PluginToolbox<GeogLevel, GeogBrief>;
 export type ProfilesToolbox = PluginToolbox<DataVizID, ProfilesMapProperties>;
 
 export interface WithToolboxes {

@@ -67,11 +67,7 @@ export function ComboBox<T extends object>(props: ComboBoxProps<T>) {
         </button>
       </div>
       {state.isOpen && (
-        <Popover
-          popoverRef={popoverRef}
-          isOpen={state.isOpen}
-          onClose={state.close}
-        >
+        <Popover ref={popoverRef} isOpen={state.isOpen} onClose={state.close}>
           <StatelessListBox
             {...listBoxProps}
             listBoxRef={listBoxRef}

@@ -1,18 +1,11 @@
 import { MapPluginConnection } from '../types';
-import {
-  GeogIdentifier,
-  GeographyType,
-  GeogTypeDescriptor,
-} from '../../../types';
+import { GeogBrief, GeogLevel, GeographyType } from '../../../types';
 import { clearLayerFilter, fetchCartoVectorSource } from '../utils';
 import { Layer, LayerProps, Source } from 'react-map-gl';
 import makeLayers from '../layers/layerSpec';
 import * as React from 'react';
 
-export const menuLayerConnection: MapPluginConnection<
-  GeogTypeDescriptor,
-  GeogIdentifier
-> = {
+export const menuLayerConnection: MapPluginConnection<GeogLevel, GeogBrief> = {
   name: 'menu',
   // todo: use available menu geog layers from profiles for this
   // todo: this will be a single selection
@@ -65,10 +58,12 @@ export const menuLayerConnection: MapPluginConnection<
       return features.map(
         ({ properties }) =>
           ({
+            id: properties.id,
+            title: properties.title,
             geogType: properties.geogtype,
             geogID: properties.geogid,
             name: properties.name,
-          } as GeogIdentifier)
+          } as GeogBrief)
       );
     }
     return [];

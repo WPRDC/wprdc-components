@@ -16,7 +16,7 @@ import { DataVizType } from '../../../types';
 export function DataVizDetails(props: DataVizDetailsProps) {
   const {
     dataViz,
-    geogIdentifier,
+    geog,
     colorScheme,
     CurrentViz,
     isLoading,
@@ -56,10 +56,10 @@ export function DataVizDetails(props: DataVizDetailsProps) {
             >
               {!!error && <MissingVizMessage error={error} />}
               {isLoading && <LoadingMessage name={dataViz && dataViz.name} />}
-              {!isLoading && !!CurrentViz && !!dataViz && !!geogIdentifier && (
+              {!isLoading && !!CurrentViz && !!dataViz && !!geog && (
                 <CurrentViz
                   dataViz={dataViz}
-                  geog={geogIdentifier}
+                  geog={geog}
                   colorScheme={colorScheme}
                   vizHeight={height - 15}
                   vizWidth={width - 15}

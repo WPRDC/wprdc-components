@@ -4,6 +4,4 @@
  *
  **/
 
-export interface ComboBoxProps {
-
-}
+export interface ComboBoxProps {}

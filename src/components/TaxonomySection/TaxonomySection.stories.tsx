@@ -1,25 +1,14 @@
 import * as React from 'react';
 import { useEffect, useState } from 'react';
-import {
-  DataVizID,
-  GeogIdentifier,
-  GeographyType,
-  Indicator,
-  Taxonomy,
-} from '../../types';
+import { DataVizID, Indicator, Taxonomy } from '../../types';
 import TaxonomySection from './TaxonomySection';
 import { ProfilesAPI } from '../../api';
 import { useProvider } from '../Provider';
+import { DEFAULT_GEOG } from '../../settings';
 
 export default {
   title: 'Taxonomy Section',
   component: TaxonomySection,
-};
-
-const DEFAULT_GEOG: GeogIdentifier = {
-  id: 104,
-  geogType: GeographyType.County,
-  geogID: '42003',
 };
 
 export const Default = () => {
@@ -40,6 +29,7 @@ export const Default = () => {
   function handleExploreIndicator(indicator: Indicator) {
     setIndicatorSlug(indicator.slug);
   }
+
   function handleExploreDataViz(dataViz: DataVizID) {
     console.log({ dataViz });
     setDataVizSlug(dataViz.slug);

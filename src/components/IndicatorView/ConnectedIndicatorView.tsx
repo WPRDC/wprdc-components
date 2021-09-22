@@ -7,14 +7,11 @@ import { IndicatorView } from './IndicatorView';
 
 export const ConnectedIndicatorView: React.FC<ConnectedIndicatorViewProps> = ({
   indicatorSlug,
-  geogIdentifier,
+  geog: propsGeog,
   ...otherProps
 }) => {
   const { geog } = useProvider();
-  const geogID = React.useMemo(
-    () => geogIdentifier || geog,
-    [geog, geogIdentifier]
-  );
+  const usedGeog = React.useMemo(() => propsGeog || geog, [geog, propsGeog]);
   const { indicator, isLoading, error } = useIndicator(indicatorSlug);
 
   if (!!error) {
@@ -24,7 +21,7 @@ export const ConnectedIndicatorView: React.FC<ConnectedIndicatorViewProps> = ({
     return (
       <IndicatorView
         indicator={indicator}
-        geogIdentifier={geogID}
+        geog={usedGeog}
         isLoading={isLoading}
         {...otherProps}
       />

@@ -23,9 +23,8 @@ export const Popup: React.FC<PopupProps> = ({
       closeOnClick={true}
       onClose={onClose}
       closeButton={false}
-      tipSize={0}
+      tipSize={5}
       anchor="bottom"
-      offsetTop={-5}
       {...otherProps}
     >
       {children}

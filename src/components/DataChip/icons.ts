@@ -2,13 +2,13 @@ import {
   RiBusLine,
   RiCommunityLine,
   RiContactsLine,
+  RiDatabase2Fill,
   RiGroupLine,
   RiMailLine,
   RiMapPinLine,
   RiPagesLine,
   RiPhoneLine,
   RiUser3Line,
-  RiDatabase2Fill,
 } from 'react-icons/ri';
 import { DataChipIcon } from './types';
 

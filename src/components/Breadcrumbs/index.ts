@@ -1,5 +1,5 @@
-import Breadcrumbs from './Breadcrumbs'
+import Breadcrumbs from './Breadcrumbs';
 
 export * from './Breadcrumbs';
 export * from './types';
-export default Breadcrumbs
+export default Breadcrumbs;

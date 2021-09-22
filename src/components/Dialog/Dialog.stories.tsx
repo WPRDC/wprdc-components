@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useOverlayTriggerState } from '@react-stately/overlays';
-import { OverlayProvider, OverlayContainer } from '@react-aria/overlays';
+import { OverlayContainer, OverlayProvider } from '@react-aria/overlays';
 import { useButton } from '@react-aria/button';
 import { Dialog } from '.';
 

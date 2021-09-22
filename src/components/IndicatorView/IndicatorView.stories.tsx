@@ -21,6 +21,8 @@ export default {
 
 const DEFAULT_GEOG = {
   id: 104,
+  name: 'Allegheny',
+  title: 'Allegheny',
   geogType: GeographyType.County,
   geogID: '42003',
 };

@@ -19,6 +19,7 @@ export const profilesConnection: MapPluginConnection<
   name: 'profiles',
   getSources(items, _, setSources, options) {
     const { geography } = options || {};
+
     // filter out highlight source and only take the data layer's source
     function filterResponse(response: ResponsePackage<DownloadedMiniMap>[]) {
       return response.reduce<SourceProps[]>((result, item) => {
@@ -64,6 +65,7 @@ export const profilesConnection: MapPluginConnection<
 
   getLegendItems(items, selected, setLegendItems, options) {
     const { geography } = options || {};
+
     // filter out highlight source and only take the data layer's source
     function filterResponse(response: ResponsePackage<DownloadedMiniMap>[]) {
       return response.reduce<LegendItemProps[]>((result, item) => {

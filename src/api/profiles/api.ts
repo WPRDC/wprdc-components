@@ -10,12 +10,12 @@ import {
   DataVizBase,
   Downloaded,
   Geog,
-  GeogDescriptor,
-  GeogIdentifier,
   GeographyType,
-  GeogTypeDescriptor,
+  GeogLevel,
   Indicator,
   Taxonomy,
+  GeogBrief,
+  GeogIdentifier,
 } from '../../types';
 
 const HOST = 'https://api.profiles.wprdc.org';
@@ -45,7 +45,7 @@ function requestIndicator(slug: string) {
 }
 
 function requestGeoLayers() {
-  return api.callAndProcessEndpoint<GeogTypeDescriptor[]>(
+  return api.callAndProcessEndpoint<GeogLevel[]>(
     Endpoint.GeogTypes,
     Method.GET
   );
@@ -53,19 +53,19 @@ function requestGeoLayers() {
 
 function requestDataViz<T extends Downloaded<DataVizBase>>(
   dataVizSlug: string,
-  geogIdentifier: GeogIdentifier
+  geog: GeogBrief
 ): Promise<ResponsePackage<T>> {
-  const { geogType, geogID } = geogIdentifier;
+  const { geogType, geogID } = geog;
   return api.callAndProcessEndpoint<T>(Endpoint.DataViz, Method.GET, {
     id: dataVizSlug,
     params: { geogType: geogType, geogID: geogID },
   });
 }
 
-function requestGeogDescription(
-  geogIdentifier: Omit<GeogIdentifier, 'id'>
+function requestGeogDetails(
+  geog: GeogIdentifier
 ): Promise<ResponsePackage<Geog>> {
-  const { geogType, geogID } = geogIdentifier;
+  const { geogType, geogID } = geog;
   return api.callAndProcessEndpoint<Geog>(Endpoint.Geog, Method.GET, {
     id: `${geogType}/${geogID}`,
     params: { details: true },
@@ -73,20 +73,16 @@ function requestGeogDescription(
 }
 
 function requestGeogList(geogType: GeographyType) {
-  return api.callAndProcessEndpoint<GeogDescriptor[]>(
-    Endpoint.Geog,
-    Method.GET,
-    {
-      id: geogType,
-    }
-  );
+  return api.callAndProcessEndpoint<GeogBrief[]>(Endpoint.Geog, Method.GET, {
+    id: geogType,
+  });
 }
 
 export const ProfilesAPI = {
   requestTaxonomy,
   requestGeoLayers,
   requestDataViz,
-  requestGeogDetails: requestGeogDescription,
+  requestGeogDetails,
   requestGeogList,
   requestIndicator,
 };

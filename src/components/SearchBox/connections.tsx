@@ -3,9 +3,9 @@ import { SearchBoxConnection } from './types';
 import { AssetBrief, AssetType } from '../../types/communityAssets';
 import {
   DataVizID,
-  GeogIdentifier,
+  GeogBrief,
+  GeogLevel,
   GeographyType,
-  GeogTypeDescriptor,
   Indicator,
   VariableBase,
 } from '../../types';
@@ -54,9 +54,7 @@ export const assetTypeConnection: SearchBoxConnection<AssetType> = {
   getKey: (item) => item.name,
 };
 
-export class GeographyConnection
-  implements SearchBoxConnection<GeogIdentifier>
-{
+export class GeographyConnection implements SearchBoxConnection<GeogBrief> {
   geogType: GeographyType;
 
   constructor(geogType: GeographyType) {
@@ -67,7 +65,7 @@ export class GeographyConnection
     signal,
     cursor,
     filterText,
-  }: AsyncListLoadOptions<GeogIdentifier, string>) => {
+  }: AsyncListLoadOptions<GeogBrief, string>) => {
     const res = await fetch(
       cursor ||
         `https://api.profiles.wprdc.org/geo/${this.geogType}/?search=${filterText}`,
@@ -80,45 +78,27 @@ export class GeographyConnection
     };
   };
 
-  public renderItem = (item: GeogIdentifier) => (
+  public renderItem = (item: GeogBrief) => (
     <Item key={item.id}>{item.title}</Item>
   );
-  public getKey = (item: GeogIdentifier) => item.id.toString();
+  public getKey = (item: GeogBrief) => item.id.toString();
 }
 
-// export const geographyConnection: SearchBoxConnection<GeogIdentifier> = {
-//   async load({ signal, cursor, filterText }) {
-//     const res = await fetch(
-//       cursor ||
-//         `https://api.profiles.wprdc.org/geo/neighborhood/?search=${filterText}`,
-//       { signal }
-//     );
-//     const json = await res.json();
-//     return {
-//       items: json.results,
-//       cursor: json.next,
-//     };
-//   },
-//   renderItem: (item) => <Item key={item.id}>{item.title}</Item>,
-//   getKey: (item) => item.id.toString(),
-// };
+export const geographyTypeConnection: SearchBoxConnection<GeogLevel> = {
+  async load({ signal }) {
+    const res = await fetch(`https://api.profiles.wprdc.org/geo/geog-types`, {
+      signal,
+    });
+    const json = await res.json();
 
-export const geographyTypeConnection: SearchBoxConnection<GeogTypeDescriptor> =
-  {
-    async load({ signal }) {
-      const res = await fetch(`https://api.profiles.wprdc.org/geo/geog-types`, {
-        signal,
-      });
-      const json = await res.json();
-
-      return {
-        items: json,
-        cursor: undefined,
-      };
-    },
-    renderItem: (item) => <Item key={item.id}>{item.name}</Item>,
-    getKey: (item) => item.id.toString(),
-  };
+    return {
+      items: json,
+      cursor: undefined,
+    };
+  },
+  renderItem: (item) => <Item key={item.id}>{item.name}</Item>,
+  getKey: (item) => item.id.toString(),
+};
 
 function makeProfilesConnection<T extends Described>(
   itemType: string
@@ -159,13 +139,13 @@ export function withConnection<T extends object>(
 
 export const AssetSearchBox = withConnection<AssetBrief>(assetsConnection);
 
-export const GeogTypeSearchBox = withConnection<GeogTypeDescriptor>(
+export const GeogTypeSearchBox = withConnection<GeogLevel>(
   geographyTypeConnection
 );
 
 export const makeGeogSearchBox = (geogType: GeographyType) =>
-  withConnection<GeogIdentifier>(new GeographyConnection(geogType));
+  withConnection<GeogBrief>(new GeographyConnection(geogType));
 
-// const GeogSearchBox = withConnection<GeogIdentifier>(geographyConnection);
+// const GeogSearchBox = withConnection<GeogBrief>(geographyConnection);
 
 export const DataVizSearchBox = withConnection<DataVizID>(dataVizConnection);

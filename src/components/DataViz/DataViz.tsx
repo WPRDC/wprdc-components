@@ -12,7 +12,7 @@ import {
   DataVizBase,
   DataVizData,
   Downloaded,
-  GeogIdentifier,
+  GeogBrief,
   VizProps,
 } from '../../types';
 
@@ -21,18 +21,20 @@ import { DEFAULT_COLOR_SCHEME } from '../../util';
 
 interface Props {
   dataViz?: Downloaded<DataVizBase>;
-  geogIdentifier?: GeogIdentifier;
+  geog?: GeogBrief;
   variant: DataVizVariant;
   isLoading?: boolean;
   error?: string;
   colorScheme?: ColorScheme;
   onExplore?: (dataViz: DataVizBase) => unknown;
+  showGeog?: boolean;
 }
 
 export function DataViz(props: Props) {
   const {
     dataViz,
-    geogIdentifier,
+    geog,
+    showGeog,
     colorScheme,
     isLoading,
     error,
@@ -94,7 +96,8 @@ export function DataViz(props: Props) {
     <>
       <WrapperComponent
         dataViz={dataViz}
-        geogIdentifier={geogIdentifier}
+        geog={geog}
+        showGeog={showGeog}
         CurrentViz={CurrentViz}
         colorScheme={colorScheme || DEFAULT_COLOR_SCHEME}
         isLoading={!!isLoading}

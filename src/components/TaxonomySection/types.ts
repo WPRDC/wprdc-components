@@ -3,7 +3,7 @@
  * TaxonomySection types
  *
  **/
-import { DataVizBase, GeogIdentifier, Indicator, Taxonomy } from '../../types';
+import { DataVizBase, GeogBrief, Indicator, Taxonomy } from '../../types';
 import { FC, Key } from 'react';
 import { BreadcrumbItemLinkProps } from '../Breadcrumbs';
 
@@ -28,7 +28,7 @@ export interface TaxonomySectionProps extends SectionSharedProps {
 }
 
 export interface SectionSharedProps {
-  geog?: GeogIdentifier;
+  geog?: GeogBrief;
   onExploreIndicator?: (indicator: Indicator) => unknown;
   onExploreDataViz?: (dataViz: DataVizBase) => unknown;
 }

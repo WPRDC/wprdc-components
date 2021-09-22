@@ -3,7 +3,7 @@
  * DataVizCard
  *
  */
-import React from 'react';
+import React, { useMemo } from 'react';
 import Measure from 'react-measure';
 import { SourceList } from '../../SourceList';
 import { LoadingMessage } from '../../LoadingMessage';
@@ -21,11 +21,13 @@ import {
 } from 'react-icons/ri';
 import { DataVizType } from '../../../types';
 import { Skeleton } from './Skeleton';
+import { getGeogIDTitle } from '../../../util/formatters';
 
 export function DataVizCard(props: DataVizCardProps) {
   const {
     dataViz,
-    geogIdentifier,
+    geog,
+    showGeog,
     colorScheme,
     CurrentViz,
     isLoading,
@@ -58,7 +60,12 @@ export function DataVizCard(props: DataVizCardProps) {
     }
   }, [vizType]);
 
-  console.log({ isLoading });
+  const geogTitle: string | undefined = useMemo(() => {
+    if (showGeog && !!geog) {
+      return ` in ${getGeogIDTitle(geog)}`;
+    }
+    return undefined;
+  }, [geog, showGeog]);
 
   if (isLoading) {
     return <Skeleton />;
@@ -71,7 +78,10 @@ export function DataVizCard(props: DataVizCardProps) {
           <Icon className={styles.typeIcon} />
           <span>{vizType}</span>
         </div>
-        <h6 className={styles.title}>{name}</h6>
+        <h6 className={styles.title}>
+          {name}
+          {geogTitle}
+        </h6>
         <p className={styles.description}>{description}</p>
       </div>
       <div className={styles.dataViz}>
@@ -89,18 +99,15 @@ export function DataVizCard(props: DataVizCardProps) {
               >
                 {isLoading && <LoadingMessage />}
                 {!!error && <MissingVizMessage error={error} />}
-                {!isLoading &&
-                  !!CurrentViz &&
-                  !!dataViz &&
-                  !!geogIdentifier && (
-                    <CurrentViz
-                      dataViz={dataViz}
-                      geog={geogIdentifier}
-                      colorScheme={colorScheme}
-                      vizHeight={height - 15}
-                      vizWidth={width - 15}
-                    />
-                  )}
+                {!isLoading && !!CurrentViz && !!dataViz && !!geog && (
+                  <CurrentViz
+                    dataViz={dataViz}
+                    geog={geog}
+                    colorScheme={colorScheme}
+                    vizHeight={height - 15}
+                    vizWidth={width - 15}
+                  />
+                )}
               </div>
             </div>
           )}

@@ -30,12 +30,10 @@ import {
 export const StatelessListBox = <T extends object>(
   props: StatelessListBoxProps<T>
 ): JSX.Element => {
-  const ref = React.useRef<HTMLUListElement>(null);
-  const { listBoxRef = ref, state, fullWidth, isLoading } = props;
+  const { listBoxRef, state, fullWidth, isLoading } = props;
   const { listBoxProps, labelProps } = useListBox<T>(props, state, listBoxRef);
 
   const layerItems = Array.from(state.collection);
-
   return (
     <div
       className={classNames([
@@ -46,26 +44,25 @@ export const StatelessListBox = <T extends object>(
       <div {...labelProps} className={styles.label}>
         {props.label}
       </div>
-      {isLoading ? (
+      {isLoading && (
         <div className={styles.loadingMessage}>
           {props.loadingMessage || 'Loading...'}
         </div>
-      ) : (
-        <ul {...listBoxProps} ref={ref} className={styles.list}>
-          {layerItems.map((item) => {
-            if (item.type === 'section') {
-              return (
-                <ListBoxSection<T>
-                  key={item.key}
-                  section={item}
-                  state={state}
-                />
-              );
-            }
-            return <Option<T> key={item.key} item={item} state={state} />;
-          })}
-        </ul>
       )}
+      <ul
+        {...listBoxProps}
+        ref={listBoxRef}
+        className={classNames(styles.list, { [styles.listHidden]: isLoading })}
+      >
+        {layerItems.map((item) => {
+          if (item.type === 'section') {
+            return (
+              <ListBoxSection<T> key={item.key} section={item} state={state} />
+            );
+          }
+          return <Option<T> key={item.key} item={item} state={state} />;
+        })}
+      </ul>
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import { ColorScheme, Geog, GeogDescriptor, GeogIdentifier } from '../../types';
+import { ColorScheme, Geog, GeogIdentifier } from '../../types';
 import { Dispatch, Reducer } from 'react';
 
 export interface ProviderAction {
@@ -14,7 +14,7 @@ export interface ProviderProps extends ProviderState {
 export interface ProviderState {
   colorScheme?: ColorScheme;
   mapboxAPIToken?: string;
-  geog?: GeogDescriptor;
+  geog?: Geog;
 }
 
 export interface ProviderContext extends ProviderState {

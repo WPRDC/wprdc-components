@@ -28,7 +28,7 @@ import {
   ViewportOptions,
 } from './types';
 import { basemaps, DEFAULT_BASEMAP_STYLE, DEFAULT_VIEWPORT } from './settings';
-import { DEFAULT_GEOIDS, hasFeatures, makeContentProps } from './utils';
+import { hasFeatures, makeContentProps } from './utils';
 import { InteractiveState } from 'react-map-gl/src/utils/map-state';
 import { LayerPanel, LayerPanelProps } from './parts/LayerPanel';
 import { Legend } from './parts/Legend';
@@ -36,7 +36,7 @@ import { DEFAULT_COLOR_SCHEME } from '../../util';
 import { HoverPopup } from './parts/HoverPopup';
 import { ClickPopup } from './parts/ClickPopup';
 import { useAssets, useMenu, useProfiles } from './hooks';
-import { GeogIdentifier } from '../../types';
+import { GeogBrief } from '../../types';
 import { AssetMapProperties } from '../../types/communityAssets';
 import { LegendItem } from './parts/LegendItem';
 import { useProvider } from '../Provider';
@@ -98,12 +98,8 @@ export const Map: React.FC<MapProps> = ({
       ? menuToolbox.selectedItems[0]
       : undefined;
 
-  const ctxGeog: GeogIdentifier | undefined = !!ctxGeogType
-    ? {
-        id: 12,
-        geogType: ctxGeogType.id,
-        geogID: DEFAULT_GEOIDS[ctxGeogType.id],
-      }
+  const ctxGeog: GeogBrief | undefined = !!ctxGeogType
+    ? ctxGeogType.defaultGeog
     : undefined;
 
   const profilesToolbox = useProfiles(
@@ -149,7 +145,7 @@ export const Map: React.FC<MapProps> = ({
     Popup: React.FC<ExtendedPopupProps>,
     setPopup: React.Dispatch<JSX.Element | null | undefined>,
     assets: AssetMapProperties[],
-    menuGeogs: GeogIdentifier[],
+    menuGeogs: GeogBrief[],
     CustomContentComponent?: PopupContentComponent,
     callback?: (evt: MapEvent, extras: MapEventExtras) => void
   ) => {

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { ListBox } from '../';
 
-import { Section, Item } from '@react-stately/collections';
+import { Item, Section } from '@react-stately/collections';
 
 export default {
   title: 'ListBox',

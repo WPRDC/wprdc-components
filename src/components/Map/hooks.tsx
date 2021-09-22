@@ -4,8 +4,8 @@ import { Expression } from 'mapbox-gl';
 import { clearLayerFilter } from './utils';
 import {
   DataVizID,
-  GeogIdentifier,
-  GeogTypeDescriptor,
+  GeogBrief,
+  GeogLevel,
   ProfilesMapProperties,
 } from '../../types';
 import { Selection } from '@react-types/shared';
@@ -153,9 +153,8 @@ export function useMapPlugin<T, E>(
   };
 }
 
-export const useMenu: ConnectedMapPlugin<GeogTypeDescriptor, GeogIdentifier> = (
-  ...args
-) => useMapPlugin(menuLayerConnection, ...args);
+export const useMenu: ConnectedMapPlugin<GeogLevel, GeogBrief> = (...args) =>
+  useMapPlugin(menuLayerConnection, ...args);
 
 export const useAssets: ConnectedMapPlugin<AssetType, AssetMapProperties> = (
   ...args

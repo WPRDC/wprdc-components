@@ -6,9 +6,15 @@
 
 .list {
 }
+
+.listHidden {
+  @apply hidden;
+}
+
 .loadingMessage {
   @apply p-2 text-center italic;
 }
+
 .separator {
   @apply py-0.5;
 }

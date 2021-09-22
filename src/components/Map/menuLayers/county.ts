@@ -13,7 +13,10 @@ const census: MenuLayerItem = {
     minzoom: 0,
     maxzoom: 11,
     source: 'census_county',
-    sql: `SELECT *, name as map_name, 'county' as geogType, geoid as geogID FROM census_county WHERE statefp = '42' AND ${censusFilter}`,
+    sql: `SELECT *, name as map_name, 'county' as geogType, geoid as geogID
+          FROM census_county
+          WHERE statefp = '42'
+            AND ${censusFilter}`,
   },
   layers: [
     {

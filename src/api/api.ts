@@ -13,6 +13,8 @@
  * @enum string}
  */
 
+import { serializeParams } from '../util/formatters';
+
 export enum Method {
   GET = 'GET',
   POST = 'POST',
@@ -35,23 +37,6 @@ export interface APIOptions {
  * @type {{string: string}}
  */
 const baseHeaders = {};
-
-/**
- * Convert an object of paramaters ({param1: value1, etc...}) for a request to
- * a query string ("?param1=value1&p2=v2...")
- *
- * @param {Object} params - object of key value pairs of parameters
- * @returns {string} - url query string representation of `params`
- */
-function serializeParams(params?: Record<string, string | number | boolean>) {
-  if (!params || !Object.keys(params)) return '';
-  return `?${Object.entries(params)
-    .map(
-      ([key, value]) =>
-        `${encodeURIComponent(key)}=${encodeURIComponent(value)}`
-    )
-    .join('&')}`;
-}
 
 class API<E extends Endpoint> {
   host: string;

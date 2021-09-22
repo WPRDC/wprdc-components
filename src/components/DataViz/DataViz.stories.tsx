@@ -2,12 +2,7 @@ import * as React from 'react';
 import { Meta, Story } from '@storybook/react';
 
 import { ConnectedDataViz, ConnectedDataVizProps, DataVizVariant } from '.';
-import {
-  DataVizID,
-  DataVizType,
-  GeogIdentifier,
-  GeographyType,
-} from '../../types';
+import { DataVizID, DataVizType, GeogBrief, GeographyType } from '../../types';
 import { Skeleton } from './DataVizCard/Skeleton';
 
 export default {
@@ -46,8 +41,10 @@ const table: DataVizID = {
 //   description: '',
 // };
 
-const geog: GeogIdentifier = {
+const geog: GeogBrief = {
   id: 0,
+  name: 'Allegheny',
+  title: 'Allegheny',
   geogType: GeographyType.County,
   geogID: '42003',
 };
@@ -67,25 +64,26 @@ export const Blurb = Template.bind({});
 export const Details = Template.bind({});
 
 Card.args = {
-  dataVizID: miniMap,
-  geogIdentifier: geog,
+  dataVizSlug: miniMap.slug,
+  geog: geog,
+  showGeog: true,
   variant: DataVizVariant.Default,
 };
 
 Preview.args = {
-  dataVizID: table,
-  geogIdentifier: geog,
+  dataVizSlug: table.slug,
+  geog: geog,
   variant: DataVizVariant.Preview,
 };
 
 Blurb.args = {
-  dataVizID: bigValue,
-  geogIdentifier: geog,
+  dataVizSlug: bigValue.slug,
+  geog: geog,
   variant: DataVizVariant.Blurb,
 };
 
 Details.args = {
-  dataVizID: miniMap,
-  geogIdentifier: geog,
+  dataVizSlug: miniMap.slug,
+  geog: geog,
   variant: DataVizVariant.Details,
 };

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Popover , PopoverProps } from './';
+import { Popover, PopoverProps } from './';
 import { Story } from '@storybook/react';
 
 export default {
@@ -10,7 +10,7 @@ export default {
 const Template: Story<PopoverProps> = (args) => <Popover {...args} />;
 
 export const Primary = Template.bind({});
-Primary.args = { };
+Primary.args = {};
 
 export const Secondary = Template.bind({});
-Secondary.args = { };
+Secondary.args = {};

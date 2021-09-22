@@ -26,7 +26,7 @@ export const ErrorMessage: React.FC<ErrorMessageProps> = ({
     );
   return (
     <span className={styles.inlineContainer}>
-      <span className={styles.inlineTitle}>{title} </span>
+      <span className={styles.inlineTitle}>{title}</span>
       <span className={styles.inlineMessage}>{message}</span>
     </span>
   );

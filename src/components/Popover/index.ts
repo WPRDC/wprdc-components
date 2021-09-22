@@ -1,5 +1,5 @@
-import Popover from './Popover'
+import Popover from './Popover';
 
 export * from './Popover';
 export * from './types';
-export default Popover
+export default Popover;

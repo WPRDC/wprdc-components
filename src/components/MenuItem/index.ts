@@ -1,5 +1,5 @@
-import MenuItem from './MenuItem'
+import MenuItem from './MenuItem';
 
 export * from './MenuItem';
 export * from './types';
-export default MenuItem
+export default MenuItem;

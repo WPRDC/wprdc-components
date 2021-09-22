@@ -6,17 +6,12 @@
  *
  */
 import * as React from 'react';
-import '../../styles/global.css'
-import styles from './MenuItem.module.css'
+import '../../styles/global.css';
 
-import { MenuItemProps } from './types'
+import { MenuItemProps } from './types';
 
 export const MenuItem: React.FC<MenuItemProps> = ({}) => {
-  return (
-    <div>
-
-    </div>
-  );
+  return <div></div>;
 };
 
 export default MenuItem;

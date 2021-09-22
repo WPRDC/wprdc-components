@@ -20,6 +20,7 @@
 .dataVizWrapper {
   @apply py-1 px-2.5;
 }
+
 .dataViz {
   @apply rounded !important;
   @apply h-44 w-full;
@@ -35,6 +36,7 @@
 .sourceLabel {
   @apply w-24 h-3 mb-2;
 }
+
 .source {
   @apply rounded !important;
   @apply w-36 h-5 my-1;

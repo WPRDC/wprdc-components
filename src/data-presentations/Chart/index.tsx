@@ -9,7 +9,7 @@ import {
   ChartViz,
   DataVizBase,
   Downloaded,
-  GeogIdentifier,
+  GeogBrief,
   RowRecord,
   TabularData,
   VizProps,
@@ -42,7 +42,7 @@ export function Chart(props: Props) {
  * @param dataViz
  * @param geog
  */
-function getExtraData(dataViz: ChartViz, geog: GeogIdentifier): PlainObject {
+function getExtraData(dataViz: ChartViz, geog: GeogBrief): PlainObject {
   // used in vega spec to apply highlight style
   let highlight;
   // lookup table for labels

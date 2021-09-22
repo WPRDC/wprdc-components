@@ -1,5 +1,6 @@
 .container {
   @apply relative mb-1;
+  @apply h-24;
 }
 
 .header {

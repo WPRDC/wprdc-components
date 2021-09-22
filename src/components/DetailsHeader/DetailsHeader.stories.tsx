@@ -1,5 +1,5 @@
 import React from 'react';
-import { DetailsHeader , DetailsHeaderProps } from './';
+import { DetailsHeader, DetailsHeaderProps } from './';
 import { Story } from '@storybook/react';
 
 export default {
@@ -7,10 +7,12 @@ export default {
   component: DetailsHeader,
 };
 
-const Template: Story<DetailsHeaderProps> = (args) => <DetailsHeader {...args} />;
+const Template: Story<DetailsHeaderProps> = (args) => (
+  <DetailsHeader {...args} />
+);
 
 export const Primary = Template.bind({});
-Primary.args = { };
+Primary.args = {};
 
 export const Secondary = Template.bind({});
-Secondary.args = { };
+Secondary.args = {};

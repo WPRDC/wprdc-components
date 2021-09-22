@@ -1,5 +1,5 @@
-import Tooltip from './Tooltip'
+import Tooltip from './Tooltip';
 
 export * from './Tooltip';
 export * from './types';
-export default Tooltip
+export default Tooltip;

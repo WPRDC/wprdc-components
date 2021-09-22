@@ -1,5 +1,5 @@
 import React from 'react';
-import { Tooltip, TooltipPopoverProps } from './';
+import { Tooltip, TooltipProps } from './';
 import { Story } from '@storybook/react';
 
 export default {
@@ -7,10 +7,13 @@ export default {
   component: Tooltip,
 };
 
-const Template: Story<TooltipPopoverProps> = (args) => <Tooltip {...args} />;
+const Template: Story<TooltipProps> = (args) => (
+  <Tooltip {...args}>
+    <button>click me, please</button>
+  </Tooltip>
+);
 
 export const Primary = Template.bind({});
-Primary.args = {};
-
-export const Secondary = Template.bind({});
-Secondary.args = {};
+Primary.args = {
+  content: <div>Thanks!</div>,
+};

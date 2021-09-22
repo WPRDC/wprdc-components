@@ -4,8 +4,8 @@ import { FocusScope } from '@react-aria/focus';
 import { PopoverProps } from './types';
 
 export function Popover(props: PopoverProps) {
-  let ref = React.useRef<HTMLDivElement>(null);
-  let { popoverRef = ref, isOpen, onClose, children } = props;
+  let defaultRef = React.useRef<HTMLDivElement>(null);
+  let { popoverRef = defaultRef, isOpen, onClose, children } = props;
 
   // Handle events that should cause the popup to close,
   // e.g. blur, clicking outside, or pressing the escape key.

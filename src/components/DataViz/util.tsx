@@ -5,7 +5,7 @@ import {
   DataVizID,
   DataVizType,
   Downloaded,
-  GeogIdentifier,
+  GeogBrief,
   RowRecord,
   TableViz,
   TabularData,
@@ -47,8 +47,8 @@ export function getSpecificDataViz(
   return componentMap[dataViz.vizType];
 }
 
-export function makeKey(dataVizID: DataVizID, geogIdentifier: GeogIdentifier) {
-  return `${dataVizID.slug}@${geogIdentifier.geogType}/${geogIdentifier.geogID}`;
+export function makeKey(dataVizID: DataVizID, geog: GeogBrief) {
+  return `${dataVizID.slug}@${geog.geogType}/${geog.geogID}`;
 }
 
 /**

@@ -73,7 +73,9 @@ export function BigValue(props: Props) {
         </p>
         <p className="text-4xl font-black text-gray-900 p-0 m-0 leading-none">
           {displayValue}
+          <wbr />
           {displayDenom}
+          <wbr />
           {displayPercent}
         </p>
       </div>

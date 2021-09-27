@@ -1,5 +1,6 @@
-import GeographyPickerMenu from './GeographyPickerMenu';
+import GeographyPicker from './GeographyPicker';
 
-export * from './GeographyPickerMenu';
+export * from './GeographyPicker';
 export * from './types';
-export default GeographyPickerMenu;
+
+export default GeographyPicker;

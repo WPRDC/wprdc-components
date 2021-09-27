@@ -149,3 +149,6 @@ export const makeGeogSearchBox = (geogType: GeographyType) =>
 // const GeogSearchBox = withConnection<GeogBrief>(geographyConnection);
 
 export const DataVizSearchBox = withConnection<DataVizID>(dataVizConnection);
+
+export const IndicatorSearchBox =
+  withConnection<Indicator>(indicatorConnection);

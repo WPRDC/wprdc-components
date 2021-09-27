@@ -26,3 +26,4 @@ export * from './Provider';
 export * from './Tabs';
 export * from './TaxonomySection';
 export * from './IndicatorView';
+export * from './GeographyPicker';

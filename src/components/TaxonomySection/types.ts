@@ -22,9 +22,7 @@ export interface TaxonomySectionProps extends SectionSharedProps {
   currentDataVizSlug?: string;
   currentDataVizHref?: string;
 
-  LinkComponent?: FC<
-    BreadcrumbItemLinkProps<HTMLAnchorElement> & { href: string }
-  >;
+  LinkComponent?: FC<BreadcrumbItemLinkProps>;
 
   onTabsChange?: (tab: Key) => any;
 }

@@ -79,8 +79,6 @@ export function SearchBox<T extends object>(props: SearchBoxProps<T>) {
     }
   }, [props.loadingState]);
 
-  console.log(props.label, { listBoxRef, listBoxProps });
-
   return (
     <div className={styles.container}>
       {props.label && (

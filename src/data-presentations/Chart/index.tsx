@@ -57,6 +57,7 @@ function getExtraData(dataViz: ChartViz, geog: GeogBrief): PlainObject {
 }
 
 function getSpec(dataViz: ChartViz): vega.Spec {
+  console.log({ dataViz });
   if (dataViz.staticOptions && dataViz.staticOptions.acrossGeogs)
     return specs.acrossGeogs;
   // if (dataViz.layout === 'column') return specs.column;
@@ -73,7 +74,6 @@ export function prepDataForVega(
   dataViz: Downloaded<ChartViz, TabularData>
 ): PlainObject {
   // todo: make lookup table for the labels and toss that into the vega spec!
-
   const addLabels = makeLabeler(dataViz);
   return { table: dataViz.data.map(addLabels) };
 }

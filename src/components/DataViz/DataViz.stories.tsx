@@ -33,14 +33,6 @@ const table: DataVizID = {
   description: '',
 };
 
-// const barChart: DataVizID = {
-//   id: 68,
-//   name: 'Population by Race',
-//   slug: 'pop-race-bar-chart',
-//   vizType: DataVizType.Chart,
-//   description: '',
-// };
-
 const geog: GeogBrief = {
   id: 0,
   name: 'Allegheny',

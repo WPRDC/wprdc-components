@@ -41,45 +41,6 @@ export function DataViz(props: Props) {
     variant = DataVizVariant.Default,
     onExplore,
   } = props;
-  // const [_, setOpenDialog] = React.useState<AvailableDialogs | null>(null);
-
-  // extra actions menu
-  // const menuItems: MenuItem[] = [
-  //   {
-  //     key: VizMenuItem.Share,
-  //     label: 'Share...',
-  //     icon: <ShareIcon className="h-4" />,
-  //   },
-  //   {
-  //     key: VizMenuItem.Report,
-  //     label: 'Questions/Concerns...',
-  //     icon: <ReportIcon className="h-4" />,
-  //   },
-  //   {
-  //     key: VizMenuItem.API,
-  //     label: 'API Endpoint',
-  //     icon: <APIIcon className="h-4" />,
-  //   },
-  // ];
-
-  // function handleMenuSelection(key: React.Key): void {
-  //   switch (key as VizMenuItem) {
-  //     case VizMenuItem.DownloadData:
-  //       // todo: setup download
-  //       break;
-  //     case VizMenuItem.DownloadSVG:
-  //       // todo: use vega svg download
-  //       break;
-  //     case VizMenuItem.Share:
-  //       setOpenDialog(AvailableDialogs.Share);
-  //       break;
-  //     case VizMenuItem.Report:
-  //       setOpenDialog(AvailableDialogs.Report);
-  //       break;
-  //     case VizMenuItem.API:
-  //       setOpenDialog(AvailableDialogs.API);
-  //   }
-  // }
 
   function handleExplore() {
     if (!!onExplore && !!dataViz) onExplore(dataViz);

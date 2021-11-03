@@ -19,8 +19,6 @@ export function Breadcrumbs<T>(props: BreadcrumbsProps<T>) {
 
   const lastChild = children[children.length - 1];
 
-  console.debug({ props });
-
   return (
     <nav {...navProps} className={styles.container}>
       <ol className={styles.list}>
@@ -56,8 +54,6 @@ export function Breadcrumbs<T>(props: BreadcrumbsProps<T>) {
 export function BreadcrumbItem(props: BreadcrumbItemProps) {
   const { LinkComponent, TitleComponent, divider, hideDivider, bigTitle } =
     props;
-
-  console.debug({ props });
 
   const ref = React.useRef(null);
   const { itemProps } = useBreadcrumbItem(props, ref);

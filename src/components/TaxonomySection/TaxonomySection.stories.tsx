@@ -31,7 +31,6 @@ export const Default = () => {
   }
 
   function handleExploreDataViz(dataViz: DataVizID) {
-    console.log({ dataViz });
     setDataVizSlug(dataViz.slug);
   }
 
